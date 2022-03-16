@@ -63,7 +63,7 @@ printClusterSubGraph gt (ClusterSubGraph { id, stmts }) =
   where
   getId Nothing = []
 
-  getId (Just id) = [ "cluster_" <> printId id ]
+  getId (Just (Id id')) = [ printId $ Id ("cluster_" <> id') ]
 
 printNodeStmt :: NodeStmt -> Matrix
 printNodeStmt (NodeStmt { id, attrs }) =
