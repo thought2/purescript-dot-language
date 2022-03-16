@@ -1,5 +1,6 @@
 module Language.Dot.Attr
-  ( Attr
+  ( Attr(..)
+  , C(..)
   , E(..)
   , G(..)
   , N(..)
@@ -10,6 +11,7 @@ module Language.Dot.Attr
   , label
   , labelImpl
   , shape
+  , unsafeAttr
   ) where
 
 import Prelude
@@ -30,6 +32,8 @@ data G
 
 data S
 
+data C
+
 class Label :: forall k. k -> Constraint
 class Label a where
   label :: String -> Attr a
@@ -37,11 +41,17 @@ class Label a where
 instance labelN :: Label N where
   label = labelImpl
 
+instance labelC :: Label C where
+  label = labelImpl
+
 labelImpl :: forall a. String -> Attr a
 labelImpl value = Attr { key: Id "label", value: Id value }
 
 shape :: Shape -> Attr N
-shape s = Attr { key: Id "label", value: Id $ shapeToString s }
+shape s = Attr { key: Id "shape", value: Id $ shapeToString s }
+
+unsafeAttr :: forall a. String -> String -> Attr a
+unsafeAttr key value = Attr { key: Id key, value: Id value }
 
 --------------------------------------------------------------------------------
 -- AttrTypes
