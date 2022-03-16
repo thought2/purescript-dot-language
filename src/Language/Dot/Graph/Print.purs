@@ -126,7 +126,7 @@ printAttrb :: forall a. Attr a -> Matrix
 printAttrb (Attr { key, value }) = [ [ printId key, "=", joinWith "" [ "\"", printId value, "\"" ], ";" ] ]
 
 printId :: Id -> String
-printId (Id id) = id
+printId (Id id) = "\"" <> id <> "\""
 
 printNodeId :: NodeId -> String
 printNodeId (NodeId { id }) = printId id
