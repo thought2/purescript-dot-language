@@ -123,7 +123,7 @@ printAttrStmt =
         }
 
 printAttrb :: forall a. Attr a -> Matrix
-printAttrb (Attr { key, value }) = [ [ printId key, "=", joinWith "" [ "\"", printId value, "\"" ], ";" ] ]
+printAttrb (Attr { key, value }) = [ [ printId key, "=", joinWith "" [ printId value ], ";" ] ]
 
 printId :: Id -> String
 printId (Id id) = "\"" <> id <> "\""
